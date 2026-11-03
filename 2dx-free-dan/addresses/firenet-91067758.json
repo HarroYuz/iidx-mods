@@ -1,0 +1,50 @@
+{
+  "version": "2.0.0 / 91067758-dirty",
+  "sha256": "9de791ab4d0b5bf9a7daafa00a75abe4bd1155a8c053717f6f349dd8c57a93a2",
+  "timestamp": "0x6ad36e3d",
+  "entry": "0x8c89c",
+  "image_size": "0x1ab000",
+  "dan_exit": "0x72e10",
+  "saved_dan_exit": "0x144270",
+  "dan_exit_bytes": "48895c241848894c2408574883ec30488bf9488d1dd7c30c0048895c2448488bcbe8f67a010085c07548813d08c40c00ffffff7f74470fb605520e0d009084c07414e8b9ddffff90eb0c488d1d9fc30c00488b7c2440488bcfff1501140d0090488bcb488b5c24504883c4305fe9d67a0100",
+  "scene_callbacks": [
+    {
+      "name": "dan_stage",
+      "slot": 16,
+      "callback": "0x727b0",
+      "saved": "0x144290"
+    },
+    {
+      "name": "arena_stage",
+      "slot": 16,
+      "callback": "0x72a40",
+      "saved": "0x144298"
+    },
+    {
+      "name": "dan_result",
+      "slot": 17,
+      "callback": "0x72cd0",
+      "saved": "0x144260"
+    },
+    {
+      "name": "arena_result",
+      "slot": 17,
+      "callback": "0x72d70",
+      "saved": "0x144268"
+    },
+    {
+      "name": "dan_flow",
+      "slot": 17,
+      "callback": "0x72e10",
+      "saved": "0x144270"
+    },
+    {
+      "name": "arena_flow",
+      "slot": 17,
+      "callback": "0x72eb0",
+      "saved": "0x144278"
+    }
+  ],
+  "evidence": "Recorder installer at 0x71550; callback array 0x71ab7..0x71aee; saved callbacks 0x71bce..0x71be5. Exit calls 0x70c10 then saved callback exactly once. Diagnostic fingerprint only; runtime chaining is not an allowlist.",
+  "limits": "0917 isolated mapped-image tests; DLL initialization, GPU recording and remote server are not exercised. 0909 retained, no old game binary."
+}

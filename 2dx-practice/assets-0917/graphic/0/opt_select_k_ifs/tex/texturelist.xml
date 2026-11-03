@@ -1,0 +1,681 @@
+<?xml version='1.0' encoding='utf-8'?>
+<texturelist compress="avslz">
+  <texture cfg="eaa-" format="argb8888rev" mag_filter="nearest" min_filter="nearest" name="tex000" wrap_s="clamp" wrap_t="clamp">
+    <size __type="2u16">1024 1024</size>
+    <image name="txt_info_sync_rnd">
+      <uvrect __type="4u16">2 1762 2 48</uvrect>
+      <imgrect __type="4u16">0 1764 0 50</imgrect>
+    </image>
+    <image name="txt_info_sym_rnd">
+      <uvrect __type="4u16">2 1762 52 98</uvrect>
+      <imgrect __type="4u16">0 1764 50 100</imgrect>
+    </image>
+    <image name="txt_info_sudhid_plus">
+      <uvrect __type="4u16">2 1762 102 148</uvrect>
+      <imgrect __type="4u16">0 1764 100 150</imgrect>
+    </image>
+    <image name="txt_info_sud_plus">
+      <uvrect __type="4u16">2 1762 152 198</uvrect>
+      <imgrect __type="4u16">0 1764 150 200</imgrect>
+    </image>
+    <image name="txt_info_s_rnd">
+      <uvrect __type="4u16">2 1762 202 248</uvrect>
+      <imgrect __type="4u16">0 1764 200 250</imgrect>
+    </image>
+    <image name="txt_info_rnd">
+      <uvrect __type="4u16">2 1762 252 298</uvrect>
+      <imgrect __type="4u16">0 1764 250 300</imgrect>
+    </image>
+    <image name="txt_info_r_rnd">
+      <uvrect __type="4u16">2 1762 302 348</uvrect>
+      <imgrect __type="4u16">0 1764 300 350</imgrect>
+    </image>
+    <image name="txt_info_operation_normal">
+      <uvrect __type="4u16">2 1762 352 398</uvrect>
+      <imgrect __type="4u16">0 1764 350 400</imgrect>
+    </image>
+    <image name="txt_info_operation_beg">
+      <uvrect __type="4u16">2 1762 402 448</uvrect>
+      <imgrect __type="4u16">0 1764 400 450</imgrect>
+    </image>
+    <image name="txt_info_mir">
+      <uvrect __type="4u16">2 1762 452 498</uvrect>
+      <imgrect __type="4u16">0 1764 450 500</imgrect>
+    </image>
+    <image name="txt_info_liftsud_plus">
+      <uvrect __type="4u16">2 1762 502 548</uvrect>
+      <imgrect __type="4u16">0 1764 500 550</imgrect>
+    </image>
+    <image name="txt_info_lift">
+      <uvrect __type="4u16">2 1762 552 598</uvrect>
+      <imgrect __type="4u16">0 1764 550 600</imgrect>
+    </image>
+    <image name="txt_info_legacy">
+      <uvrect __type="4u16">2 1762 602 648</uvrect>
+      <imgrect __type="4u16">0 1764 600 650</imgrect>
+    </image>
+    <image name="txt_info_hid_plus">
+      <uvrect __type="4u16">2 1762 652 698</uvrect>
+      <imgrect __type="4u16">0 1764 650 700</imgrect>
+    </image>
+    <image name="txt_info_hard">
+      <uvrect __type="4u16">2 1762 702 748</uvrect>
+      <imgrect __type="4u16">0 1764 700 750</imgrect>
+    </image>
+    <image name="txt_info_flip">
+      <uvrect __type="4u16">2 1762 752 798</uvrect>
+      <imgrect __type="4u16">0 1764 750 800</imgrect>
+    </image>
+    <image name="txt_info_exhard">
+      <uvrect __type="4u16">2 1762 802 848</uvrect>
+      <imgrect __type="4u16">0 1764 800 850</imgrect>
+    </image>
+    <image name="txt_info_easy">
+      <uvrect __type="4u16">2 1762 852 898</uvrect>
+      <imgrect __type="4u16">0 1764 850 900</imgrect>
+    </image>
+    <image name="txt_info_ascr_legacy">
+      <uvrect __type="4u16">2 1762 902 948</uvrect>
+      <imgrect __type="4u16">0 1764 900 950</imgrect>
+    </image>
+    <image name="txt_info_ascr">
+      <uvrect __type="4u16">2 1762 952 998</uvrect>
+      <imgrect __type="4u16">0 1764 950 1000</imgrect>
+    </image>
+    <image name="txt_info_a_easy">
+      <uvrect __type="4u16">2 1762 1002 1048</uvrect>
+      <imgrect __type="4u16">0 1764 1000 1050</imgrect>
+    </image>
+    <image name="txt_d_show_disp_time">
+      <uvrect __type="4u16">2 1762 1052 1098</uvrect>
+      <imgrect __type="4u16">0 1764 1050 1100</imgrect>
+    </image>
+    <image name="txt_d_op_timing">
+      <uvrect __type="4u16">2 1762 1102 1148</uvrect>
+      <imgrect __type="4u16">0 1764 1100 1150</imgrect>
+    </image>
+    <image name="txt_d_op_thumbnail">
+      <uvrect __type="4u16">2 1762 1152 1198</uvrect>
+      <imgrect __type="4u16">0 1764 1150 1200</imgrect>
+    </image>
+    <image name="txt_d_op_stagemain_bright">
+      <uvrect __type="4u16">2 1762 1202 1248</uvrect>
+      <imgrect __type="4u16">0 1764 1200 1250</imgrect>
+    </image>
+    <image name="txt_d_op_soflan_notice">
+      <uvrect __type="4u16">2 1762 1252 1298</uvrect>
+      <imgrect __type="4u16">0 1764 1250 1300</imgrect>
+    </image>
+    <image name="txt_d_op_operation">
+      <uvrect __type="4u16">2 1762 1302 1348</uvrect>
+      <imgrect __type="4u16">0 1764 1300 1350</imgrect>
+    </image>
+    <image name="txt_d_op_lane_bright">
+      <uvrect __type="4u16">2 1762 1352 1398</uvrect>
+      <imgrect __type="4u16">0 1764 1350 1400</imgrect>
+    </image>
+    <image name="txt_d_op_judgefont_position">
+      <uvrect __type="4u16">2 1762 1402 1448</uvrect>
+      <imgrect __type="4u16">0 1764 1400 1450</imgrect>
+    </image>
+    <image name="txt_d_op_judge_division">
+      <uvrect __type="4u16">2 1762 1452 1498</uvrect>
+      <imgrect __type="4u16">0 1764 1450 1500</imgrect>
+    </image>
+    <image name="txt_d_op_judge_auto">
+      <uvrect __type="4u16">2 1762 1502 1548</uvrect>
+      <imgrect __type="4u16">0 1764 1500 1550</imgrect>
+    </image>
+    <image name="txt_d_op_judge">
+      <uvrect __type="4u16">2 1762 1552 1598</uvrect>
+      <imgrect __type="4u16">0 1764 1550 1600</imgrect>
+    </image>
+    <image name="txt_d_op_highspeed">
+      <uvrect __type="4u16">2 1762 1602 1648</uvrect>
+      <imgrect __type="4u16">0 1764 1600 1650</imgrect>
+    </image>
+    <image name="txt_d_op_graph_score">
+      <uvrect __type="4u16">2 1762 1652 1698</uvrect>
+      <imgrect __type="4u16">0 1764 1650 1700</imgrect>
+    </image>
+    <image name="txt_d_op_ghost_score">
+      <uvrect __type="4u16">2 1762 1702 1748</uvrect>
+      <imgrect __type="4u16">0 1764 1700 1750</imgrect>
+    </image>
+    <image name="txt_d_op_ghost">
+      <uvrect __type="4u16">2 1762 1752 1798</uvrect>
+      <imgrect __type="4u16">0 1764 1750 1800</imgrect>
+    </image>
+    <image name="txt_d_op_gauge_type">
+      <uvrect __type="4u16">2 1762 1802 1848</uvrect>
+      <imgrect __type="4u16">0 1764 1800 1850</imgrect>
+    </image>
+    <image name="txt_d_op_camera">
+      <uvrect __type="4u16">2 1762 1852 1898</uvrect>
+      <imgrect __type="4u16">0 1764 1850 1900</imgrect>
+    </image>
+    <image name="txt_d_op_ascr_type">
+      <uvrect __type="4u16">2 1762 1902 1948</uvrect>
+      <imgrect __type="4u16">0 1764 1900 1950</imgrect>
+    </image>
+    <image name="txt_d_op_adjust_timing">
+      <uvrect __type="4u16">2 1762 1952 1998</uvrect>
+      <imgrect __type="4u16">0 1764 1950 2000</imgrect>
+    </image>
+    <image name="txt_tsg_operation">
+      <uvrect __type="4u16">2 902 2002 2046</uvrect>
+      <imgrect __type="4u16">0 904 2000 2048</imgrect>
+    </image>
+    <image name="txt_extra_operation">
+      <uvrect __type="4u16">906 1806 2002 2046</uvrect>
+      <imgrect __type="4u16">904 1808 2000 2048</imgrect>
+    </image>
+  </texture>
+  <texture cfg="eaa-" format="argb8888rev" mag_filter="nearest" min_filter="nearest" name="tex001" wrap_s="clamp" wrap_t="clamp">
+    <size __type="2u16">1024 1024</size>
+    <image name="txt_d_disp_time_adjust">
+      <uvrect __type="4u16">2 1762 2 48</uvrect>
+      <imgrect __type="4u16">0 1764 0 50</imgrect>
+    </image>
+    <image name="txt_d_disp_area_lock">
+      <uvrect __type="4u16">2 1762 52 98</uvrect>
+      <imgrect __type="4u16">0 1764 50 100</imgrect>
+    </image>
+    <image name="waku_extra_info_2pp">
+      <uvrect __type="4u16">2 1186 102 410</uvrect>
+      <imgrect __type="4u16">0 1188 100 412</imgrect>
+    </image>
+    <image name="waku_style_sp">
+      <uvrect __type="4u16">1190 1602 102 1034</uvrect>
+      <imgrect __type="4u16">1188 1604 100 1036</imgrect>
+    </image>
+    <image name="waku_style_dp_btl">
+      <uvrect __type="4u16">2 826 414 1346</uvrect>
+      <imgrect __type="4u16">0 828 412 1348</imgrect>
+    </image>
+    <image name="waku_style_dp">
+      <uvrect __type="4u16">830 1654 1038 1970</uvrect>
+      <imgrect __type="4u16">828 1656 1036 1972</imgrect>
+    </image>
+    <image name="waku_range">
+      <uvrect __type="4u16">1606 2018 102 1034</uvrect>
+      <imgrect __type="4u16">1604 2020 100 1036</imgrect>
+    </image>
+    <image name="d_op_timing">
+      <uvrect __type="4u16">1658 1994 1038 1970</uvrect>
+      <imgrect __type="4u16">1656 1996 1036 1972</imgrect>
+    </image>
+    <image name="sg_tsujigiri">
+      <uvrect __type="4u16">2 706 1350 1410</uvrect>
+      <imgrect __type="4u16">0 708 1348 1412</imgrect>
+    </image>
+    <image name="sg_shop_top">
+      <uvrect __type="4u16">2 706 1414 1474</uvrect>
+      <imgrect __type="4u16">0 708 1412 1476</imgrect>
+    </image>
+    <image name="sg_shop_rotate">
+      <uvrect __type="4u16">2 706 1478 1538</uvrect>
+      <imgrect __type="4u16">0 708 1476 1540</imgrect>
+    </image>
+    <image name="sg_shop_next">
+      <uvrect __type="4u16">2 706 1542 1602</uvrect>
+      <imgrect __type="4u16">0 708 1540 1604</imgrect>
+    </image>
+    <image name="sg_rndp">
+      <uvrect __type="4u16">2 706 1606 1666</uvrect>
+      <imgrect __type="4u16">0 708 1604 1668</imgrect>
+    </image>
+    <image name="sg_rival_next">
+      <uvrect __type="4u16">2 706 1670 1730</uvrect>
+      <imgrect __type="4u16">0 708 1668 1732</imgrect>
+    </image>
+    <image name="sg_rival">
+      <uvrect __type="4u16">2 706 1734 1794</uvrect>
+      <imgrect __type="4u16">0 708 1732 1796</imgrect>
+    </image>
+    <image name="sg_riva_top">
+      <uvrect __type="4u16">2 706 1798 1858</uvrect>
+      <imgrect __type="4u16">0 708 1796 1860</imgrect>
+    </image>
+    <image name="sg_riva_rotate">
+      <uvrect __type="4u16">2 706 1862 1922</uvrect>
+      <imgrect __type="4u16">0 708 1860 1924</imgrect>
+    </image>
+    <image name="sg_riva_ave">
+      <uvrect __type="4u16">2 706 1926 1986</uvrect>
+      <imgrect __type="4u16">0 708 1924 1988</imgrect>
+    </image>
+    <image name="sg_riva6">
+      <uvrect __type="4u16">710 1414 1974 2034</uvrect>
+      <imgrect __type="4u16">708 1416 1972 2036</imgrect>
+    </image>
+    <image name="10key_op_tsujigiri_on">
+      <uvrect __type="4u16">1418 1838 1974 2020</uvrect>
+      <imgrect __type="4u16">1416 1840 1972 2022</imgrect>
+    </image>
+    <image name="10key_op_tsujigiri">
+      <uvrect __type="4u16">2 422 1990 2036</uvrect>
+      <imgrect __type="4u16">0 424 1988 2038</imgrect>
+    </image>
+  </texture>
+  <texture cfg="eaa-" format="argb8888rev" mag_filter="nearest" min_filter="nearest" name="tex002" wrap_s="clamp" wrap_t="clamp">
+    <size __type="2u16">1024 1024</size>
+    <image name="waku_gauge">
+      <uvrect __type="4u16">2 414 2 934</uvrect>
+      <imgrect __type="4u16">0 416 0 936</imgrect>
+    </image>
+    <image name="waku_flip">
+      <uvrect __type="4u16">418 830 2 934</uvrect>
+      <imgrect __type="4u16">416 832 0 936</imgrect>
+    </image>
+    <image name="waku_beg_legacy">
+      <uvrect __type="4u16">834 1246 2 934</uvrect>
+      <imgrect __type="4u16">832 1248 0 936</imgrect>
+    </image>
+    <image name="waku_beg_highspeed">
+      <uvrect __type="4u16">1250 1662 2 934</uvrect>
+      <imgrect __type="4u16">1248 1664 0 936</imgrect>
+    </image>
+    <image name="waku_beg_easy">
+      <uvrect __type="4u16">2 414 938 1870</uvrect>
+      <imgrect __type="4u16">0 416 936 1872</imgrect>
+    </image>
+    <image name="waku_beg_ascr">
+      <uvrect __type="4u16">418 830 938 1870</uvrect>
+      <imgrect __type="4u16">416 832 936 1872</imgrect>
+    </image>
+    <image name="waku_assist">
+      <uvrect __type="4u16">834 1246 938 1870</uvrect>
+      <imgrect __type="4u16">832 1248 936 1872</imgrect>
+    </image>
+    <image name="d_op_thumbnail">
+      <uvrect __type="4u16">1666 2002 2 934</uvrect>
+      <imgrect __type="4u16">1664 2004 0 936</imgrect>
+    </image>
+    <image name="d_op_stagemain_bright">
+      <uvrect __type="4u16">1250 1586 938 1870</uvrect>
+      <imgrect __type="4u16">1248 1588 936 1872</imgrect>
+    </image>
+    <image name="d_op_soflan_notice">
+      <uvrect __type="4u16">1590 1926 938 1870</uvrect>
+      <imgrect __type="4u16">1588 1928 936 1872</imgrect>
+    </image>
+    <image name="sg_riva5">
+      <uvrect __type="4u16">2 706 1874 1934</uvrect>
+      <imgrect __type="4u16">0 708 1872 1936</imgrect>
+    </image>
+    <image name="sg_riva4">
+      <uvrect __type="4u16">710 1414 1874 1934</uvrect>
+      <imgrect __type="4u16">708 1416 1872 1936</imgrect>
+    </image>
+    <image name="sg_riva3">
+      <uvrect __type="4u16">2 706 1938 1998</uvrect>
+      <imgrect __type="4u16">0 708 1936 2000</imgrect>
+    </image>
+    <image name="sg_riva2">
+      <uvrect __type="4u16">710 1414 1938 1998</uvrect>
+      <imgrect __type="4u16">708 1416 1936 2000</imgrect>
+    </image>
+    <image name="txt_d_op_turnchange">
+      <uvrect __type="4u16">1418 1818 1874 1910</uvrect>
+      <imgrect __type="4u16">1416 1820 1872 1912</imgrect>
+    </image>
+  </texture>
+  <texture cfg="eaa-" format="argb8888rev" mag_filter="nearest" min_filter="nearest" name="tex003" wrap_s="clamp" wrap_t="clamp">
+    <size __type="2u16">1024 1024</size>
+    <image name="pv_op_tx2">
+      <uvrect __type="4u16">2 934 2 180</uvrect>
+      <imgrect __type="4u16">0 936 0 182</imgrect>
+    </image>
+    <image name="pv_op_tx1">
+      <uvrect __type="4u16">2 934 184 362</uvrect>
+      <imgrect __type="4u16">0 936 182 364</imgrect>
+    </image>
+    <image name="pv_op_sp_soflan_notice_d">
+      <uvrect __type="4u16">2 934 366 890</uvrect>
+      <imgrect __type="4u16">0 936 364 892</imgrect>
+    </image>
+    <image name="pv_op_sp_soflan_notice_c">
+      <uvrect __type="4u16">938 1870 2 526</uvrect>
+      <imgrect __type="4u16">936 1872 0 528</imgrect>
+    </image>
+    <image name="pv_op_sp_soflan_notice_b">
+      <uvrect __type="4u16">938 1870 530 1054</uvrect>
+      <imgrect __type="4u16">936 1872 528 1056</imgrect>
+    </image>
+    <image name="pv_op_sp_soflan_notice_a">
+      <uvrect __type="4u16">2 934 894 1418</uvrect>
+      <imgrect __type="4u16">0 936 892 1420</imgrect>
+    </image>
+    <image name="pv_op_sp_disp_time_adjust_dp">
+      <uvrect __type="4u16">938 1870 1058 1582</uvrect>
+      <imgrect __type="4u16">936 1872 1056 1584</imgrect>
+    </image>
+    <image name="pv_op_sp_disp_time_adjust">
+      <uvrect __type="4u16">2 934 1422 1946</uvrect>
+      <imgrect __type="4u16">0 936 1420 1948</imgrect>
+    </image>
+    <image name="sg_riva1">
+      <uvrect __type="4u16">938 1642 1586 1646</uvrect>
+      <imgrect __type="4u16">936 1644 1584 1648</imgrect>
+    </image>
+    <image name="sg_pacemaker_rotate">
+      <uvrect __type="4u16">938 1642 1650 1710</uvrect>
+      <imgrect __type="4u16">936 1644 1648 1712</imgrect>
+    </image>
+    <image name="sg_notarget">
+      <uvrect __type="4u16">938 1642 1714 1774</uvrect>
+      <imgrect __type="4u16">936 1644 1712 1776</imgrect>
+    </image>
+    <image name="sg_monly">
+      <uvrect __type="4u16">938 1642 1778 1838</uvrect>
+      <imgrect __type="4u16">936 1644 1776 1840</imgrect>
+    </image>
+    <image name="sg_lotop">
+      <uvrect __type="4u16">938 1642 1842 1902</uvrect>
+      <imgrect __type="4u16">936 1644 1840 1904</imgrect>
+    </image>
+    <image name="sg_loave">
+      <uvrect __type="4u16">938 1642 1906 1966</uvrect>
+      <imgrect __type="4u16">936 1644 1904 1968</imgrect>
+    </image>
+    <image name="sg_lkyot">
+      <uvrect __type="4u16">2 706 1950 2010</uvrect>
+      <imgrect __type="4u16">0 708 1948 2012</imgrect>
+    </image>
+    <image name="sg_lkyoa">
+      <uvrect __type="4u16">710 1414 1970 2030</uvrect>
+      <imgrect __type="4u16">708 1416 1968 2032</imgrect>
+    </image>
+  </texture>
+  <texture cfg="eaa-" format="argb8888rev" mag_filter="nearest" min_filter="nearest" name="tex004" wrap_s="clamp" wrap_t="clamp">
+    <size __type="2u16">1024 1024</size>
+    <image name="pv_op_dp_soflan_notice_d">
+      <uvrect __type="4u16">2 934 2 526</uvrect>
+      <imgrect __type="4u16">0 936 0 528</imgrect>
+    </image>
+    <image name="pv_op_dp_soflan_notice_c">
+      <uvrect __type="4u16">938 1870 2 526</uvrect>
+      <imgrect __type="4u16">936 1872 0 528</imgrect>
+    </image>
+    <image name="pv_op_dp_soflan_notice_b">
+      <uvrect __type="4u16">2 934 530 1054</uvrect>
+      <imgrect __type="4u16">0 936 528 1056</imgrect>
+    </image>
+    <image name="pv_op_dp_soflan_notice_a">
+      <uvrect __type="4u16">938 1870 530 1054</uvrect>
+      <imgrect __type="4u16">936 1872 528 1056</imgrect>
+    </image>
+    <image name="pv_d_op_graph_score_off">
+      <uvrect __type="4u16">2 934 1058 1582</uvrect>
+      <imgrect __type="4u16">0 936 1056 1584</imgrect>
+    </image>
+    <image name="pv_d_op_graph_score_b">
+      <uvrect __type="4u16">938 1870 1058 1582</uvrect>
+      <imgrect __type="4u16">936 1872 1056 1584</imgrect>
+    </image>
+    <image name="sg_ghost">
+      <uvrect __type="4u16">2 706 1586 1646</uvrect>
+      <imgrect __type="4u16">0 708 1584 1648</imgrect>
+    </image>
+    <image name="sg_dantp">
+      <uvrect __type="4u16">710 1414 1586 1646</uvrect>
+      <imgrect __type="4u16">708 1416 1584 1648</imgrect>
+    </image>
+    <image name="sg_danav">
+      <uvrect __type="4u16">2 706 1650 1710</uvrect>
+      <imgrect __type="4u16">0 708 1648 1712</imgrect>
+    </image>
+    <image name="sg_altop">
+      <uvrect __type="4u16">710 1414 1650 1710</uvrect>
+      <imgrect __type="4u16">708 1416 1648 1712</imgrect>
+    </image>
+    <image name="sg_alave">
+      <uvrect __type="4u16">2 706 1714 1774</uvrect>
+      <imgrect __type="4u16">0 708 1712 1776</imgrect>
+    </image>
+  </texture>
+  <texture cfg="eaa-" format="argb8888rev" mag_filter="nearest" min_filter="nearest" name="tex005" wrap_s="clamp" wrap_t="clamp">
+    <size __type="2u16">1024 1024</size>
+    <image name="pv_d_op_graph_score_a">
+      <uvrect __type="4u16">2 934 2 526</uvrect>
+      <imgrect __type="4u16">0 936 0 528</imgrect>
+    </image>
+    <image name="pv_d_op_ghost_score_b">
+      <uvrect __type="4u16">938 1870 2 526</uvrect>
+      <imgrect __type="4u16">936 1872 0 528</imgrect>
+    </image>
+    <image name="pv_d_op_ghost_score_a">
+      <uvrect __type="4u16">2 934 530 1054</uvrect>
+      <imgrect __type="4u16">0 936 528 1056</imgrect>
+    </image>
+    <image name="pv_d_op_font_no_dp">
+      <uvrect __type="4u16">938 1870 530 1054</uvrect>
+      <imgrect __type="4u16">936 1872 528 1056</imgrect>
+    </image>
+    <image name="pv_d_op_font_no">
+      <uvrect __type="4u16">2 934 1058 1582</uvrect>
+      <imgrect __type="4u16">0 936 1056 1584</imgrect>
+    </image>
+    <image name="pv_d_op_camera_off_dp">
+      <uvrect __type="4u16">938 1870 1058 1582</uvrect>
+      <imgrect __type="4u16">936 1872 1056 1584</imgrect>
+    </image>
+  </texture>
+  <texture cfg="eaa-" format="argb8888rev" mag_filter="nearest" min_filter="nearest" name="tex006" wrap_s="clamp" wrap_t="clamp">
+    <size __type="2u16">1024 1024</size>
+    <image name="pv_d_op_camera_off">
+      <uvrect __type="4u16">2 934 2 526</uvrect>
+      <imgrect __type="4u16">0 936 0 528</imgrect>
+    </image>
+    <image name="pv_d_op_adjust_dp">
+      <uvrect __type="4u16">938 1870 2 526</uvrect>
+      <imgrect __type="4u16">936 1872 0 528</imgrect>
+    </image>
+    <image name="pv_d_op_adjust">
+      <uvrect __type="4u16">2 934 530 1054</uvrect>
+      <imgrect __type="4u16">0 936 528 1056</imgrect>
+    </image>
+    <image name="pv_d_disp_time_adjust_off">
+      <uvrect __type="4u16">938 1870 530 1054</uvrect>
+      <imgrect __type="4u16">936 1872 528 1056</imgrect>
+    </image>
+    <image name="d_op_show_disp_time">
+      <uvrect __type="4u16">2 338 1058 1990</uvrect>
+      <imgrect __type="4u16">0 340 1056 1992</imgrect>
+    </image>
+    <image name="d_op_notes_bright">
+      <uvrect __type="4u16">342 678 1058 1990</uvrect>
+      <imgrect __type="4u16">340 680 1056 1992</imgrect>
+    </image>
+    <image name="d_op_lane_bright">
+      <uvrect __type="4u16">682 1018 1058 1990</uvrect>
+      <imgrect __type="4u16">680 1020 1056 1992</imgrect>
+    </image>
+    <image name="d_op_judgefont_position">
+      <uvrect __type="4u16">1022 1358 1058 1990</uvrect>
+      <imgrect __type="4u16">1020 1360 1056 1992</imgrect>
+    </image>
+    <image name="d_op_judge_division">
+      <uvrect __type="4u16">1362 1698 1058 1990</uvrect>
+      <imgrect __type="4u16">1360 1700 1056 1992</imgrect>
+    </image>
+    <image name="d_op_judge_auto">
+      <uvrect __type="4u16">1702 2038 1058 1990</uvrect>
+      <imgrect __type="4u16">1700 2040 1056 1992</imgrect>
+    </image>
+  </texture>
+  <texture cfg="eaa-" format="argb8888rev" mag_filter="nearest" min_filter="nearest" name="tex007" wrap_s="clamp" wrap_t="clamp">
+    <size __type="2u16">1024 1024</size>
+    <image name="d_op_judge_division_on_dp">
+      <uvrect __type="4u16">2 934 2 526</uvrect>
+      <imgrect __type="4u16">0 936 0 528</imgrect>
+    </image>
+    <image name="d_op_judge_division_on">
+      <uvrect __type="4u16">938 1870 2 526</uvrect>
+      <imgrect __type="4u16">936 1872 0 528</imgrect>
+    </image>
+    <image name="d_op_judge">
+      <uvrect __type="4u16">2 338 530 1462</uvrect>
+      <imgrect __type="4u16">0 340 528 1464</imgrect>
+    </image>
+    <image name="d_op_hispeed">
+      <uvrect __type="4u16">342 678 530 1462</uvrect>
+      <imgrect __type="4u16">340 680 528 1464</imgrect>
+    </image>
+    <image name="d_op_graph_score">
+      <uvrect __type="4u16">682 1018 530 1462</uvrect>
+      <imgrect __type="4u16">680 1020 528 1464</imgrect>
+    </image>
+    <image name="d_op_ghost_score">
+      <uvrect __type="4u16">1022 1358 530 1462</uvrect>
+      <imgrect __type="4u16">1020 1360 528 1464</imgrect>
+    </image>
+    <image name="d_op_ghost">
+      <uvrect __type="4u16">1362 1698 530 1462</uvrect>
+      <imgrect __type="4u16">1360 1700 528 1464</imgrect>
+    </image>
+    <image name="d_op_gauge_type">
+      <uvrect __type="4u16">1702 2038 530 1462</uvrect>
+      <imgrect __type="4u16">1700 2040 528 1464</imgrect>
+    </image>
+  </texture>
+  <texture cfg="eaa-" format="argb8888rev" mag_filter="nearest" min_filter="nearest" name="tex008" wrap_s="clamp" wrap_t="clamp">
+    <size __type="2u16">1024 512</size>
+    <image name="d_op_disp_time_adjust">
+      <uvrect __type="4u16">2 338 2 934</uvrect>
+      <imgrect __type="4u16">0 340 0 936</imgrect>
+    </image>
+    <image name="d_op_disp_area_lock">
+      <uvrect __type="4u16">342 678 2 934</uvrect>
+      <imgrect __type="4u16">340 680 0 936</imgrect>
+    </image>
+    <image name="d_op_camera">
+      <uvrect __type="4u16">682 1018 2 934</uvrect>
+      <imgrect __type="4u16">680 1020 0 936</imgrect>
+    </image>
+    <image name="d_op_ascr_type">
+      <uvrect __type="4u16">1022 1358 2 934</uvrect>
+      <imgrect __type="4u16">1020 1360 0 936</imgrect>
+    </image>
+    <image name="d_op_adjust_timing">
+      <uvrect __type="4u16">1362 1698 2 934</uvrect>
+      <imgrect __type="4u16">1360 1700 0 936</imgrect>
+    </image>
+  </texture>
+  <texture format="argb8888rev" mag_filter="nearest" min_filter="nearest" name="practice000" wrap_s="clamp" wrap_t="clamp">
+    <size __type="2u16">2048 2048</size>
+    <image name="allscr_preview">
+      <imgrect __type="4u16">0 740 0 492</imgrect>
+      <uvrect __type="4u16">2 738 2 490</uvrect>
+    </image>
+    <image name="d_op_allscr_off">
+      <imgrect __type="4u16">744 1084 0 936</imgrect>
+      <uvrect __type="4u16">746 1082 2 934</uvrect>
+    </image>
+    <image name="d_op_allscr_on">
+      <imgrect __type="4u16">1088 1428 0 936</imgrect>
+      <uvrect __type="4u16">1090 1426 2 934</uvrect>
+    </image>
+    <image name="d_op_rate_070">
+      <imgrect __type="4u16">1432 1772 0 936</imgrect>
+      <uvrect __type="4u16">1434 1770 2 934</uvrect>
+    </image>
+    <image name="d_op_rate_075">
+      <imgrect __type="4u16">1776 2116 0 936</imgrect>
+      <uvrect __type="4u16">1778 2114 2 934</uvrect>
+    </image>
+    <image name="d_op_rate_080">
+      <imgrect __type="4u16">2120 2460 0 936</imgrect>
+      <uvrect __type="4u16">2122 2458 2 934</uvrect>
+    </image>
+    <image name="d_op_rate_085">
+      <imgrect __type="4u16">2464 2804 0 936</imgrect>
+      <uvrect __type="4u16">2466 2802 2 934</uvrect>
+    </image>
+    <image name="d_op_rate_090">
+      <imgrect __type="4u16">2808 3148 0 936</imgrect>
+      <uvrect __type="4u16">2810 3146 2 934</uvrect>
+    </image>
+    <image name="d_op_rate_095">
+      <imgrect __type="4u16">3152 3492 0 936</imgrect>
+      <uvrect __type="4u16">3154 3490 2 934</uvrect>
+    </image>
+    <image name="d_op_rate_100">
+      <imgrect __type="4u16">3496 3836 0 936</imgrect>
+      <uvrect __type="4u16">3498 3834 2 934</uvrect>
+    </image>
+    <image name="d_op_rate_105">
+      <imgrect __type="4u16">0 340 940 1876</imgrect>
+      <uvrect __type="4u16">2 338 942 1874</uvrect>
+    </image>
+    <image name="d_op_rate_110">
+      <imgrect __type="4u16">344 684 940 1876</imgrect>
+      <uvrect __type="4u16">346 682 942 1874</uvrect>
+    </image>
+    <image name="d_op_rate_115">
+      <imgrect __type="4u16">688 1028 940 1876</imgrect>
+      <uvrect __type="4u16">690 1026 942 1874</uvrect>
+    </image>
+    <image name="d_op_rate_120">
+      <imgrect __type="4u16">1032 1372 940 1876</imgrect>
+      <uvrect __type="4u16">1034 1370 942 1874</uvrect>
+    </image>
+    <image name="d_op_rate_125">
+      <imgrect __type="4u16">1376 1716 940 1876</imgrect>
+      <uvrect __type="4u16">1378 1714 942 1874</uvrect>
+    </image>
+    <image name="d_op_rate_130">
+      <imgrect __type="4u16">1720 2060 940 1876</imgrect>
+      <uvrect __type="4u16">1722 2058 942 1874</uvrect>
+    </image>
+    <image name="d_op_rate_135">
+      <imgrect __type="4u16">2064 2404 940 1876</imgrect>
+      <uvrect __type="4u16">2066 2402 942 1874</uvrect>
+    </image>
+    <image name="d_op_rate_140">
+      <imgrect __type="4u16">2408 2748 940 1876</imgrect>
+      <uvrect __type="4u16">2410 2746 942 1874</uvrect>
+    </image>
+    <image name="d_op_rate_145">
+      <imgrect __type="4u16">2752 3092 940 1876</imgrect>
+      <uvrect __type="4u16">2754 3090 942 1874</uvrect>
+    </image>
+    <image name="d_op_rate_150">
+      <imgrect __type="4u16">3096 3436 940 1876</imgrect>
+      <uvrect __type="4u16">3098 3434 942 1874</uvrect>
+    </image>
+    <image name="rate_blank">
+      <imgrect __type="4u16">3440 3444 940 944</imgrect>
+      <uvrect __type="4u16">3442 3442 942 942</uvrect>
+    </image>
+    <image name="rate_preview">
+      <imgrect __type="4u16">0 740 1880 2372</imgrect>
+      <uvrect __type="4u16">2 738 1882 2370</uvrect>
+    </image>
+    <image name="rate_preview_nosave">
+      <imgrect __type="4u16">744 1484 1880 2372</imgrect>
+      <uvrect __type="4u16">746 1482 1882 2370</uvrect>
+    </image>
+    <image name="txt_d_op_allscr">
+      <imgrect __type="4u16">1488 3252 1880 1930</imgrect>
+      <uvrect __type="4u16">1490 3250 1882 1928</uvrect>
+    </image>
+    <image name="txt_d_op_rate">
+      <imgrect __type="4u16">0 1764 2376 2426</imgrect>
+      <uvrect __type="4u16">2 1762 2378 2424</uvrect>
+    </image>
+    <image name="txt_d_op_rate_conflict">
+      <imgrect __type="4u16">1768 3532 2376 2426</imgrect>
+      <uvrect __type="4u16">1770 3530 2378 2424</uvrect>
+    </image>
+    <image name="txt_d_op_rate_locked">
+      <imgrect __type="4u16">0 1764 2430 2480</imgrect>
+      <uvrect __type="4u16">2 1762 2432 2478</uvrect>
+    </image>
+    <image name="txt_d_op_rate_nosave">
+      <imgrect __type="4u16">1768 3532 2430 2480</imgrect>
+      <uvrect __type="4u16">1770 3530 2432 2478</uvrect>
+    </image>
+  </texture>
+</texturelist>

@@ -1,0 +1,12 @@
+build/
+dist/
+fixtures/
+logs/
+*.exe
+*.dll
+*.o
+__pycache__/
+*.pyc
+*.log
+*.dmp
+tests/*.ini

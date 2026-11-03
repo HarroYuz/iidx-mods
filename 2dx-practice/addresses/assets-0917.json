@@ -1,0 +1,50 @@
+[
+  {
+    "ifs": "data\\graphic\\0\\opt_select.ifs",
+    "sha256": "41064186a680e5a81c1fcca9bf5759340768ef02ee5ebb4f6a4b1dd123048ac5",
+    "native_images": 308,
+    "native_xml_sha256": "dcb08d46a83c5aa07c48a806b2a3ef14764043717ed63e99eae24094dd713ebe"
+  },
+  {
+    "ifs": "data\\graphic\\1\\opt_select.ifs",
+    "sha256": "7764b23cb3382d132da32907cd17b963188a2c74a2becb98efc706992af55b31",
+    "native_images": 283,
+    "native_xml_sha256": "5c23eb520487dfd49b27bf7e0702337e3405a46827c201e2d23b03ec8af90a69"
+  },
+  {
+    "ifs": "data\\graphic\\0\\opt_select_a.ifs",
+    "sha256": "19748e40cb4cd1720ec6de772505b92ed25b2256078c7e363d43116958c770e7",
+    "native_images": 134,
+    "native_xml_sha256": "f559013382d340c13c5c43b1abe2c1a2218018900f383f9787cba4cadaf840a6"
+  },
+  {
+    "ifs": "data\\graphic\\1\\opt_select_a.ifs",
+    "sha256": "5a1d1dbe3b1c51ec41f5521110a9054d71b3e93024dc361408f2a0e9e4ab9aa5",
+    "native_images": 112,
+    "native_xml_sha256": "5b75cc1d9cc863a6f37407b686576b01e47fdc9e14d449db95bd990b159d5f13"
+  },
+  {
+    "ifs": "data\\graphic\\0\\opt_select_j.ifs",
+    "sha256": "761c5ed861abecee227bc4334e609d5f1317e991ba39d6c646c16fd4facea9f9",
+    "native_images": 134,
+    "native_xml_sha256": "f559013382d340c13c5c43b1abe2c1a2218018900f383f9787cba4cadaf840a6"
+  },
+  {
+    "ifs": "data\\graphic\\1\\opt_select_j.ifs",
+    "sha256": "94c502823271d5846b9cf6088f1043e11c480e77bbc6923ad75c0a86db948daa",
+    "native_images": 112,
+    "native_xml_sha256": "0d14ed3cc6d733896614f66e2986f0846828c605c0de3211cba969db9b21c855"
+  },
+  {
+    "ifs": "data\\graphic\\0\\opt_select_k.ifs",
+    "sha256": "78ed6ff32b55902f47753f55fda40b6bc5db35361944eccdfeddb43efa90806e",
+    "native_images": 134,
+    "native_xml_sha256": "f559013382d340c13c5c43b1abe2c1a2218018900f383f9787cba4cadaf840a6"
+  },
+  {
+    "ifs": "data\\graphic\\1\\opt_select_k.ifs",
+    "sha256": "eecc2254eaea89dfbfc8122bf0fd65787c27bc486179aed931f9c5ce15247e5e",
+    "native_images": 112,
+    "native_xml_sha256": "5b75cc1d9cc863a6f37407b686576b01e47fdc9e14d449db95bd990b159d5f13"
+  }
+]

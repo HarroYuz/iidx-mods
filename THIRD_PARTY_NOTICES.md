@@ -8,7 +8,7 @@ The repository's existing [GPL-3.0 license](LICENSE) is retained for this projec
 | [Zydis](https://github.com/zyantific/zydis) | `1ba75aeefae37094c7be8eba07ff81d4fe0f1f20` | [MIT](licenses/Zydis.txt) |
 | [Zycore](https://github.com/zyantific/zycore-c) | Submodule revision pinned by the Zydis commit above | [MIT](licenses/Zycore.txt) |
 
-These license texts are retained verbatim. Dependency source is retrieved from the fixed revisions above, not from local game directories. Required interface PNG/XML resources are kept with the relevant mod; optional art-generation drafts are excluded.
+These license texts are retained verbatim. Dependency source is retrieved from the fixed revisions above, not from local game directories. Required interface PNG/XML resources are kept in the root data_mods directory; optional art-generation drafts are excluded.
 
 ## IFS LayeredFS runtime dependency
 

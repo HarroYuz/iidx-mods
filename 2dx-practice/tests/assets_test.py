@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 root = Path(__file__).resolve().parents[1]
 hashes = json.loads((root / "addresses/asset-native-hashes.json").read_text())
 for relative, expected in hashes.items():
-    path = root / relative
+    path = root.parent / "data_mods/practice" / relative
     tree = ET.parse(path).getroot()
     assert hashlib.sha256(b"".join(ET.tostring(x).strip() for x in tree[:-1])).hexdigest() == expected
     custom = tree[-1]
@@ -27,4 +27,4 @@ for relative, expected in hashes.items():
             assert r <= x1 or x2 <= l or b <= y1 or y2 <= t
         rectangles.append((l, r, t, b))
     assert not pngs
-print("PASS: 12 native texture lists retained; 336 added sprite rectangles upright and disjoint")
+print("PASS: 8 native texture lists retained; 224 added sprite rectangles upright and disjoint")

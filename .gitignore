@@ -45,3 +45,9 @@
 /2dx-free-dan/tools/build_title_assets.py
 /2dx-free-dan/tools/install-entry-assets.ps1
 /2dx-practice/tools/build_rate_assets.py
+
+# Runtime resources are published once, under root data_mods.
+/2dx-free-dan/assets/
+/2dx-free-dan/assets-0917/
+/2dx-practice/assets/
+/2dx-practice/assets-0917/

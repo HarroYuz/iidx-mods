@@ -8,7 +8,7 @@ $pe = [BitConverter]::ToInt32($bytes,60)
 $stamp = [BitConverter]::ToUInt32($bytes,$pe+8)
 $entry = [BitConverter]::ToUInt32($bytes,$pe+24+16)
 $size = [BitConverter]::ToUInt32($bytes,$pe+24+56)
-$profile = @('0909','0917') | ForEach-Object {
+$profile = @('0917') | ForEach-Object {
     Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot "addresses/$_.json") | ConvertFrom-Json
 } | Where-Object {
     [Convert]::ToUInt32($_.timestamp.Substring(2),16) -eq $stamp -and
@@ -18,8 +18,10 @@ $profile = @('0909','0917') | ForEach-Object {
 if (@($profile).Count -ne 1) { throw 'Unsupported game: installation cancelled.' }
 if (-not (Test-Path -LiteralPath (Join-Path $root 'ifs_hook.dll'))) { throw 'ifs_hook.dll is required.' }
 $dll = Join-Path $PSScriptRoot 'build/2dx-practice.dll'
-if (-not (Test-Path -LiteralPath $dll)) { throw 'Run build.ps1 first.' }
-$assets = Join-Path $PSScriptRoot $(if($profile.id -eq '0917'){'assets-0917'}else{'assets'})
+if (-not (Test-Path -LiteralPath $dll)) { $dll = Join-Path (Split-Path -Parent $PSScriptRoot) 'build/bin/2dx-practice.dll' }
+if (-not (Test-Path -LiteralPath $dll)) { throw 'Build with CMake or build.ps1 first.' }
+$assets = Join-Path (Split-Path -Parent $PSScriptRoot) 'data_mods/practice'
+if (-not (Test-Path -LiteralPath $assets)) { throw 'The repository data_mods resources are required.' }
 $destination = [IO.Path]::GetFullPath((Join-Path $root 'data_mods/practice'))
 if (-not $destination.StartsWith($root+'\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Unsafe asset destination.' }
 $backup = Join-Path $root ('mod-backups/2dx-practice-'+(Get-Date -Format 'yyyyMMdd-HHmmss-ffff'))

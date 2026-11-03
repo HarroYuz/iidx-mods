@@ -8,7 +8,7 @@ $pe = [BitConverter]::ToInt32($bytes,60)
 $stamp = [BitConverter]::ToUInt32($bytes,$pe+8)
 $entry = [BitConverter]::ToUInt32($bytes,$pe+24+16)
 $size = [BitConverter]::ToUInt32($bytes,$pe+24+56)
-$profile = @('0909','0917') | ForEach-Object {
+$profile = @('0917') | ForEach-Object {
     Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot "addresses/$_.json") | ConvertFrom-Json
 } | Where-Object {
     [Convert]::ToUInt32($_.timestamp.Substring(2),16) -eq $stamp -and
@@ -18,16 +18,18 @@ $profile = @('0909','0917') | ForEach-Object {
 if (@($profile).Count -ne 1) { throw 'Unsupported game: installation cancelled.' }
 if (-not (Test-Path -LiteralPath (Join-Path $root 'ifs_hook.dll'))) { throw 'ifs_hook.dll is required.' }
 $dll = Join-Path $PSScriptRoot 'build/2dx-free-dan.dll'
-if (-not (Test-Path -LiteralPath $dll)) { throw 'Run build.ps1 first.' }
-$assets = Join-Path $PSScriptRoot $(if($profile.id -eq '0917'){'assets-0917'}else{'assets'})
-$destination = [IO.Path]::GetFullPath((Join-Path $root 'data_mods/self_dan'))
+if (-not (Test-Path -LiteralPath $dll)) { $dll = Join-Path (Split-Path -Parent $PSScriptRoot) 'build/bin/2dx-free-dan.dll' }
+if (-not (Test-Path -LiteralPath $dll)) { throw 'Build with CMake or build.ps1 first.' }
+$assets = Join-Path (Split-Path -Parent $PSScriptRoot) 'data_mods/free_dan'
+if (-not (Test-Path -LiteralPath $assets)) { throw 'The repository data_mods resources are required.' }
+$destination = [IO.Path]::GetFullPath((Join-Path $root 'data_mods/free_dan'))
 if (-not $destination.StartsWith($root+'\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Unsafe asset destination.' }
 $backup = Join-Path $root ('mod-backups/2dx-free-dan-'+(Get-Date -Format 'yyyyMMdd-HHmmss-ffff'))
 New-Item -ItemType Directory -Path $backup -Force | Out-Null
 if (Test-Path -LiteralPath $destination) {
     $resolved = (Resolve-Path -LiteralPath $destination).Path
-    if ($resolved -ne $destination -or -not $resolved.StartsWith($root+'\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Unsafe resolved asset path.' }
-    Move-Item -LiteralPath $resolved -Destination (Join-Path $backup 'self_dan')
+    if ($resolved -ne $destination -or -not $resolved.StartsWith($root+'\data_mods\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Unsafe resolved asset path.' }
+    Move-Item -LiteralPath $resolved -Destination (Join-Path $backup 'free_dan')
 }
 $installed = Join-Path $root '2dx-free-dan.dll'
 if (Test-Path -LiteralPath $installed) { Copy-Item -LiteralPath $installed -Destination $backup }

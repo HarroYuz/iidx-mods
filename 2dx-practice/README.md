@@ -1,6 +1,10 @@
 # 2dx-practice：歌曲倍速与 ALL SCRATCH
 
-适配 **IIDX 34 ZINRAI / LDJ2026091700-010（20260917-010）**，Windows x64。支持版本从 34 开始，不支持 33 及更早版本；其他版本需另行适配。
+## 适配版本
+
+**IIDX 34 ZINRAI**：
+
+- LDJ2026091700-010
 
 ## 功能与操作
 
@@ -45,4 +49,4 @@ cmake --build build --target 2dx-practice --parallel 4
 
 输出 `build/bin/2dx-practice.dll`。也保留独立 `build.ps1 -Compiler g++ -Python python` 构建入口，输出本目录 `build/`。
 
-测试覆盖速度边界、谱面处理、原生菜单与音频接口、请求分类、练习成绩保护，以及与 free-dan 的两种加载顺序和课程状态联动。`v0.1.0` 已由用户实机测试确认。
+测试覆盖速度边界、谱面处理、原生菜单与音频接口、请求分类、练习成绩保护，以及与 free-dan 的两种加载顺序和课程状态联动。

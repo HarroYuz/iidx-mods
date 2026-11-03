@@ -6,21 +6,23 @@
 
 ## 适配版本
 
-支持版本从 **IIDX 34 ZINRAI** 开始。`v0.1.0` 适配并测试的 `bm2dx.dll` 版本为 **LDJ2026091700-010**（20260917-010）。不支持 IIDX 33 及更早版本，也不保证其他日期的 IIDX 34 或后续版本可用。源码保留了实现与回归测试所需的旧地址表，但不提供旧版游戏支持。
+**IIDX 34 ZINRAI**：
 
-运行环境为 Windows x64、spice/spice2x。游戏文件不包含在本仓库或 Release 中；Release 附带已核对来源的 ifs_hook，GSM/FireNet 等其他插件需自行准备。
+- LDJ2026091700-010
 
 ## 目录说明
 
-| 子目录 / DLL | 用途 |
+| MOD 名称 | 用途 |
 | --- | --- |
-| [2dx-free-dan](2dx-free-dan/) / `2dx-free-dan.dll` | 逐首自选四曲组成段位，并扩展段位谱面选项与逐曲结算标记。 |
-| [2dx-practice](2dx-practice/) / `2dx-practice.dll` | 提供歌曲倍速和 ALL SCRATCH，练习修改生效时禁止保存成绩。 |
-| [2dx-no-fail](2dx-no-fail/) / `2dx-no-fail.dll` | 允许 H/EXH 和段位负血继续演奏，支持自动灯及主副屏负血显示。 |
-| [data_mods](data_mods/) | **资源文件夹，不是模组**：存放自选段位与练习菜单的 PNG/XML，不需要在 Hook 中添加。 |
-| [licenses](licenses/) | 第三方依赖的许可证文本。 |
+| [2dx-free-dan](2dx-free-dan/) | 逐首自选四曲组成段位，并扩展段位谱面选项与逐曲结算标记。 |
+| [2dx-practice](2dx-practice/) | 提供歌曲倍速和 ALL SCRATCH，练习修改生效时禁止保存成绩。 |
+| [2dx-no-fail](2dx-no-fail/) | 允许 H/EXH 和段位负血继续演奏，支持自动灯及主副屏负血显示。 |
+
+[data_mods](data_mods/) 是**资源文件夹，不是模组**，存放自选段位与练习菜单的 PNG/XML，无需添加到 Hook。[licenses](licenses/) 存放第三方依赖的许可证。
 
 ## 安装与加载
+
+适用于 Windows x64，通过 spice/spice2x 加载。
 
 1. 在 [Releases](https://github.com/HarroYuz/iidx-mods/releases) 下载需要的 DLL，放到 **`bm2dx.dll` 同级目录**。三个模组可按需选择；建议共同使用同一版本的 DLL。
 2. free-dan 和 practice 需要 `ifs_hook.dll` 及界面资源。从 Release 下载 `ifs_hook.dll`，放在同一目录；将 `data_mods.zip` 解压到游戏目录，得到 `data_mods/free_dan/` 和 `data_mods/practice/`。压缩包还附有许可证。no-fail 本身不需要额外图片。也可直接将仓库根目录的 `data_mods` 复制到游戏目录，保留其中的 `free_dan`、`practice` 目录结构。
@@ -32,7 +34,7 @@
 spice64.exe [原有参数] -k ifs_hook.dll -k 2dx-free-dan.dll -k 2dx-practice.dll -k 2dx-no-fail.dll
 ```
 
-`[原有参数]` 仅为说明，请保留自己的服务器、显示等设置，不要原样输入方括号。若使用 GSM/FireNet 自动灯，把对应 DLL 放在 `2dx-no-fail.dll` 前面。启动 `boot.bat` 时请**以管理员身份运行**。
+`[原有参数]` 仅为说明，请保留自己的服务器、显示等设置，不要原样输入方括号。使用自动灯插件时，将其 DLL 放在 `2dx-no-fail.dll` 前面。启动 `boot.bat` 时请**以管理员身份运行**。
 
 更新前退出游戏，备份旧 DLL 和资源。界面资源未刷新时，退出游戏后备份并移走 `data_mods/_cache/graphic/0`、`1` 下对应的 `mselect_ifs` 或 `opt_select*_ifs` 缓存，让 ifs_hook 重建。不要同时加载旧整合版 `2dx-self-dan.dll` 与新的 free-dan/practice。
 
@@ -40,7 +42,7 @@ spice64.exe [原有参数] -k ifs_hook.dll -k 2dx-free-dan.dll -k 2dx-practice.d
 
 ### 运行时依赖
 
-附带的 `ifs_hook.dll` 来自 [mon/ifs_layeredfs v3.7](https://github.com/mon/ifs_layeredfs/releases/tag/v3.7) 的 `64bit/ifs_hook.dll`，已核对与本机实测文件完全一致，SHA-256 为：`0543c6bcb8dd7aafe39dae4b82df0158c1c86ff740a0b078b1118aa923bdb24c`。上游源码与许可证见 [依赖说明](THIRD_PARTY_NOTICES.md)。该 DLL 未作修改，仍适用上游许可证。
+附带的 `ifs_hook.dll` 来自 [mon/ifs_layeredfs v3.7](https://github.com/mon/ifs_layeredfs/releases/tag/v3.7) 的 64 位版本，用于加载界面资源。该 DLL 未作修改，仍适用上游许可证；源码与许可证见[依赖说明](THIRD_PARTY_NOTICES.md)。
 
 ## 从源码构建 DLL
 
@@ -56,14 +58,6 @@ ctest --test-dir build --output-on-failure
 
 产物位于 `build/bin/`：`2dx-free-dan.dll`、`2dx-practice.dll`、`2dx-no-fail.dll`。也可通过 `cmake --build build --target 2dx-no-fail` 等命令只构建指定模组。
 
-首次配置会下载固定提交的 SafetyHook 和 Zydis（含 Zycore）；依赖及许可证见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。构建不需要游戏、GSM 或 FireNet 的二进制文件。生成的地址头文件已包含在仓库中；修改地址表后可运行各模组的 `tools/generate_addresses.py` 重新生成。
+首次配置会下载固定提交的 SafetyHook 和 Zydis（含 Zycore）；依赖及许可证见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。构建不需要游戏或其他插件的二进制文件。生成的地址头文件已包含在仓库中；修改地址表后可运行各模组的 `tools/generate_addresses.py` 重新生成。
 
-默认测试不需要游戏文件。需要运行本机原生代码的隔离测试时，可重新配置：
-
-```powershell
-cmake -S . -B build -DIIDX_GAME_ROOT="E:/Game/IIDX"
-cmake --build build --parallel 4
-ctest --test-dir build --output-on-failure
-```
-
-此类测试映射指定版本的本地二进制，替换图形或网络后端；不会自动打歌或提交服务器成绩。`build/`、测试日志、私有游戏文件、调试转储和本机开发历史均不提交到 Git；根目录 `data_mods` 中的 PNG/XML 是模组运行所需的资源文件，随源码一同提供。
+默认测试不需要游戏文件。`build/`、测试日志、游戏文件和调试转储不提交到 Git；根目录 `data_mods` 中的 PNG/XML 随源码一同提供。

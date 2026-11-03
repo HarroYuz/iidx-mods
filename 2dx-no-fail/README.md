@@ -1,6 +1,10 @@
 # 2dx-no-fail：负血继续演奏
 
-适配 **IIDX 34 ZINRAI / LDJ2026091700-010（20260917-010）**，Windows x64。支持版本从 34 开始，不支持 33 及更早版本；其他版本需另行适配。
+## 适配版本
+
+**IIDX 34 ZINRAI**：
+
+- LDJ2026091700-010
 
 ## 功能
 
@@ -13,7 +17,7 @@
 
 固定 H/EXH 死亡后仍判 FAILED，但分数、miss count 可以照常保存和上传；其他模组的成绩保存限制仍然有效。
 
-兼容本地 `2dx-gsm.dll` 和 FireNet 自动灯：并行计算 EXH、H、NORMAL、EASY、ASSISTED EASY，遵守开局档位与最低切换档，选择仍合格的最高档灯。较高档破血后，降档后的合格结果可以保存；没有合格档时不上传。结算初始显示最优档，按 **VEFX** 切换血条视图，背景、血线与 dead point 同步变化；查看失败档不会改变保存档位。
+搭配已适配的自动灯插件时，并行计算 EXH、H、NORMAL、EASY、ASSISTED EASY，遵守开局档位与最低切换档，选择仍合格的最高档灯。较高档破血后，降档后的合格结果可以保存；没有合格档时不上传。结算初始显示最优档，按 **VEFX** 切换血条视图，背景、血线与 dead point 同步变化；查看失败档不会改变保存档位。
 
 副屏分别保存各曲的显示历史，不用当前曲数据覆盖旧曲目。负值只写入本地有符号显示历史，不写入无符号上传 ghost 数据。
 
@@ -32,10 +36,10 @@
 本模组不需要额外图片。与 free-dan、practice 或自动灯插件共同使用时，**no-fail 最后加载**，例如：
 
 ```bat
--k ifs_hook.dll -k 2dx-free-dan.dll -k 2dx-practice.dll -k firenet.dll -k 2dx-no-fail.dll
+-k ifs_hook.dll -k 2dx-free-dan.dll -k 2dx-practice.dll -k 2dx-no-fail.dll
 ```
 
-仅添加自己实际使用的插件；`firenet.dll` 与 `2dx-gsm.dll` 不包含在 Release 中。当前适配检查对应 GSM `ecf5d28b…`、FireNet `9de791ab…`（完整 SHA-256 见 `tools/audit.py`），其他插件版本需要另行验证。
+仅添加实际使用的插件；自动灯插件需单独准备，并在 no-fail 之前加载。其他插件版本的兼容性需另行验证。
 
 以管理员身份运行 `boot.bat`。日志位于游戏目录 `no-fail-mod/runtime.log`。
 
@@ -47,6 +51,6 @@
 cmake --build build --target 2dx-no-fail --parallel 4
 ```
 
-输出 `build/bin/2dx-no-fail.dll`。SafetyHook、Zydis/Zycore 会从固定提交获取，**不需要本机 gsm-mod 源码目录**。
+输出 `build/bin/2dx-no-fail.dll`。SafetyHook、Zydis/Zycore 会从固定提交获取。
 
-测试覆盖永久失败、自动降档、SP/DP 两侧、原生低血量补正、显示档位与保存档位互不影响、副屏历史与坐标，以及四首自选段位在负血或触零后回正时的曲终退出。`v0.1.0` 已由用户实机测试确认。
+测试覆盖永久失败、自动降档、SP/DP 两侧、原生低血量补正、显示档位与保存档位互不影响、副屏历史与坐标，以及四首自选段位在负血或触零后回正时的曲终退出。

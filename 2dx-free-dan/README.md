@@ -1,6 +1,10 @@
 # 2dx-free-dan：自选段位
 
-适配 **IIDX 34 ZINRAI / LDJ2026091700-010（20260917-010）**，Windows x64。支持版本从 34 开始，不支持 33 及更早版本；其他版本需另行适配。
+## 适配版本
+
+**IIDX 34 ZINRAI**：
+
+- LDJ2026091700-010
 
 ## 功能与操作
 
@@ -47,4 +51,4 @@ cmake --build build --target 2dx-free-dan --parallel 4
 
 输出 `build/bin/2dx-free-dan.dll`。也保留独立 `build.ps1 -Compiler g++ -Python python` 构建入口，输出本目录 `build/`。
 
-自动测试覆盖四曲选择、血量继承、各曲失败结束、SP/DP、段位选项和保存保护；no-fail 联动测试使用真实原生结算行验证负血及触零后回血结果。`v0.1.0` 已由用户实机测试确认。
+自动测试覆盖四曲选择、血量继承、各曲失败结束、SP/DP、段位选项和保存保护；no-fail 联动测试使用真实原生结算行验证负血及触零后回血结果。

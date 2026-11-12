@@ -4,6 +4,8 @@
 
 本仓库包含 beatmania IIDX 的自选段位、练习和 no-fail 模组，沿用仓库已有的 [GNU GPL v3](LICENSE) 许可证。
 
+**v0.1.1 修复**：no-fail 不再将中途退曲误判为通关；H/EXH 和段位内部血量低于 100、显示为 0% 时立即锁定失败，之后回血也不会恢复资格。v0.1.0 已撤下，请更新 `2dx-no-fail.dll`。
+
 ## 适配版本
 
 **IIDX 34 ZINRAI**：

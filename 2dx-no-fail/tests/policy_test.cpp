@@ -5,13 +5,22 @@ using namespace no_fail;
 int main() {
     for (auto g : {Gauge::hard, Gauge::exhard}) {
         Track t; t.reset(g);
-        t.apply(g, -4999); assert(t.value == 1 && t.clear(g));
+        t.apply(g, -4900); assert(t.value == 100 && t.clear(g));
+        t.apply(g, -99); assert(t.value == 1 && t.failed && !t.clear(g));
         t.apply(g, -1); assert(t.failed && !t.clear(g) && !t.red());
         t.apply(g, -5000); assert(t.value == -5000 && t.red());
         t.apply(g, 10000); assert(t.value == 5000 && !t.clear(g));
         t.reset(g); assert(t.clear(g));
         for (int i=0; i<100; ++i) t.apply(g, -5000);
         assert(t.value == -495000); // Cannot fit the old int16 graph API.
+    }
+    for (auto g : {Gauge::hard, Gauge::exhard}) for (int low : {-1, 0, 1, 49, 50, 99, 100}) {
+        Track t; t.reset(g); t.apply(g, low - 5000);
+        assert(t.value == low && t.failed == (low < 100));
+        t.apply(g, 5000); assert(t.clear(g) == (low >= 100));
+        // A stage carry must be observed before the first recovery judgement.
+        t.reset(g); t.value = low; t.apply(g, 500);
+        assert(t.failed == (low < 100));
     }
     for (auto g : {Gauge::normal, Gauge::easy, Gauge::assisted}) {
         Track t; t.reset(g); t.apply(g, -100000);

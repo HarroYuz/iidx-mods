@@ -54,9 +54,11 @@ int main(int argc,char**argv) {
     auto apply=reinterpret_cast<void(*)(int,int)>(game+0x95cee0);
     for(int side=0;side<2;++side) {
         *reinterpret_cast<uintptr_t*>(game+0xbcb66c8+16*side)=0;
-        survival=true;gauge(side)=5000;apply(side,-4950);
-        assert(gauge(side)==0); // Native depletion happens at <2%, not <=0.
-        apply(side,1000);assert(gauge(side)==0); // Native death is absorbing.
+        for(int low:{-1,0,1,49,50,99,100}) {
+            survival=true;gauge(side)=5000;apply(side,low-5000);
+            assert(gauge(side)==(low<100?0:low));
+            apply(side,1000);assert(gauge(side)==(low<100?0:1100));
+        }
         survival=false;gauge(side)=1000;apply(side,-5000);
         assert(gauge(side)==100); // Ordinary gauge retains native 2% floor.
     }
@@ -66,7 +68,7 @@ int main(int argc,char**argv) {
     for(int side=0;side<2;++side) {
         survival=true;track.reset(no_fail::Gauge::hard);
         gauge(side)=5000;apply(side,-4950);
-        assert(gauge(side)==50 && !track.failed);
+        assert(gauge(side)==50 && track.failed);
         apply(side,-50);assert(gauge(side)==0 && track.failed);
         apply(side,-5000);assert(gauge(side)==-5000);
         apply(side,6000);assert(gauge(side)==1000 && track.failed);

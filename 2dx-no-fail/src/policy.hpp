@@ -10,6 +10,9 @@ namespace no_fail {
 enum class Gauge : unsigned { normal, assisted, easy, hard, exhard };
 constexpr unsigned index(Gauge g) { return static_cast<unsigned>(g); }
 constexpr bool hard(Gauge g) { return g == Gauge::hard || g == Gauge::exhard; }
+// The native display is 2 * (raw / 100). Survival gauges deplete below
+// 100 raw units, including the positive remainder that displays as 0%.
+constexpr std::int64_t survival_minimum = 100;
 constexpr std::array<int, 5> rank{2, 0, 1, 3, 4};
 constexpr std::array<Gauge, 5> descending{
     Gauge::exhard, Gauge::hard, Gauge::normal, Gauge::easy, Gauge::assisted};
@@ -21,15 +24,16 @@ struct Track {
     // delta must come from the native judgement calculation before clamping.
     // Never infer delta from the clamped gauge or run scoring callbacks twice.
     void apply(Gauge type, std::int32_t delta) {
+        if (hard(type)) failed = failed || value < survival_minimum;
         constexpr auto floor = std::numeric_limits<std::int64_t>::min();
         value = delta < 0 && value < floor - delta ? floor : value + delta;
         value = std::min<std::int64_t>(5000, value);
-        if (hard(type)) failed = failed || value <= 0;
+        if (hard(type)) failed = failed || value < survival_minimum;
         // 0917 ordinary gauges retain the original 2% (100-unit) floor.
         else value = std::max<std::int64_t>(100, value);
     }
     bool clear(Gauge type) const {
-        if (hard(type)) return !failed && value > 0;
+        if (hard(type)) return !failed && value >= survival_minimum;
         return value >= (type == Gauge::assisted ? 3000 : 4000);
     }
     bool red() const { return value < 0; }

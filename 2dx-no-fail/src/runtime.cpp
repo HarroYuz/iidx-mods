@@ -27,7 +27,7 @@ struct Side {
     no_fail::Player policy;
     std::array<std::array<int64_t,384>,5> history{};
     std::array<std::array<int32_t,4>,5> judgements{};
-    bool active=false;
+    bool active=false,terminated=false;
     bool dan=false,dan_started=false;
     no_fail::Track dan_track;
     std::array<Death,5> deaths{};
@@ -48,6 +48,7 @@ SafetyHookInline *history_hook{},*graph_value_hook{};
 SafetyHookInline* dan_row_hook{};
 SafetyHookInline *dead_init_hook{},*dead_render_hook{},*dead_notes_hook{};
 SafetyHookInline* death_hook{};
+SafetyHookInline* set_gauge_hook{};
 thread_local bool showing_dead=false;
 void(*native_update)(int,int){};
 void* native_update_code{};
@@ -83,6 +84,11 @@ void record_death(int side,unsigned gauge,bool failed){
     d.recorded=true;
     d.measure=field<int>(fn<void*(*)()>(0x815d40)(),0x64);
     d.notes=fn<int(*)(void*,int)>(0x8e8f70)(fn<void*(*)()>(0x8e94f0)(),side);
+    char message[192]{};
+    const auto value=sides[side].dan?sides[side].dan_track.value:sides[side].policy.tracks[gauge].value;
+    std::snprintf(message,sizeof message,"gauge depleted: side=%d dan=%d gauge=%u raw=%lld measure=%d notes=%d",
+        side,int(sides[side].dan),gauge,static_cast<long long>(value),d.measure,d.notes);
+    log(message);
 }
 void publish_death(int side){
     if(!initialized || side<0 || side>1 || !sides[side].active)return;
@@ -95,6 +101,7 @@ void native_death(void* manager,int side,bool failed){
 }
 bool blocked(int side){
     if(side<0 || side>1 || !initialized || !sides[side].active)return false;
+    if(sides[side].terminated)return true;
     if(sides[side].dan)return sides[side].dan_track.failed;
     const auto& p=sides[side].policy;
     if(!no_fail::hard(p.starting))return false;
@@ -102,20 +109,34 @@ bool blocked(int side){
 }
 // A failed lamp does not invalidate a fixed-gauge music score. Keep course
 // and automatic-gauge save policy separate from the permanent clear latch.
-bool save_blocked(int side){return blocked(side) && (sides[side].dan || sides[side].policy.automatic);}
+bool save_blocked(int side){return blocked(side) && (sides[side].terminated || sides[side].dan || sides[side].policy.automatic);}
 void publish_save_state(){unsigned active=0,invalid=0;bool course_failed=false;for(int s=0;s<2;++s)if(sides[s].active){active|=1u<<s;if(save_blocked(s)){invalid|=1u<<s;course_failed|=sides[s].dan;}}blocked_mask=invalid;active_mask=active;dan_failed=course_failed;}
 bool all_blocked(){const unsigned active=active_mask.load();return dan_failed.load() || (active && (blocked_mask.load()&active)==active);}
+int set_gauge(int side,int value){
+    const int result=set_gauge_hook->call<int>(side,value);
+    // 0917's two early-exit paths call this absolute setter with zero for
+    // both sides. It is not the judgement delta or chart initialization.
+    // The independent simulation must not turn that forced failure into a
+    // surviving H/EXH (or a full ordinary gauge) at result/save time.
+    if(initialized && side>=0 && side<2 && sides[side].active && value==0){
+        sides[side].terminated=true;
+        publish_value(side,0);publish_save_state();
+        log("native stage termination: clear and save blocked until chart reset");
+    }
+    return result;
+}
 void choose(int side){
     if(sides[side].dan)return;
     auto& p=sides[side].policy;auto g=p.display();set_type(side,no_fail::index(g));
     at<unsigned>(side?0xb11faec:0xb11fab4)=no_fail::index(g);
     std::memcpy(&at<int32_t>(0xbcbb2c4+20*side),sides[side].judgements[no_fail::index(g)].data(),16);
-    publish_value(side,native_value(p.tracks[no_fail::index(g)].value));
+    publish_value(side,sides[side].terminated?0:native_value(p.tracks[no_fail::index(g)].value));
     publish_death(side);
 }
 void delta(int side,int amount){
     if(side<0 || side>1 || !initialized || !sides[side].active || !mode_ok())return delta_hook->call<void>(side,amount);
     auto& s=sides[side];
+    if(s.terminated)return;
     if(s.dan){
         // Native stage preparation applies the preceding song's carry after
         // chart initialization. Read it at the first actual gauge update.
@@ -150,6 +171,7 @@ template<class Call>void calculate(int side,Call&& call){
 template<class Call>void simulate(int side,Call&& call){
     if(side<0 || side>1 || !initialized || !sides[side].active || !mode_ok() || in_simulation){call();return;}
     auto& s=sides[side];auto& p=s.policy;
+    if(s.terminated){call();publish_value(side,0);return;}
     if(s.dan || !p.automatic){calculate(side,call);if(!s.dan && !no_fail::hard(p.starting))p.tracks[no_fail::index(p.starting)].value=raw(side);publish_save_state();return;}
     in_simulation=true;
     for(unsigned g=0;g<5;++g){
@@ -323,8 +345,9 @@ int graph_value(void* object,int side,int x){
 bool invalid_record(int side,bool assist){return save_blocked(side)||guard_hook->call<bool>(side,assist);}
 int clear(int side){
     if(side==0 || side==1){
+        if(blocked(side))return 0;
         if(initialized && sides[side].active && sides[side].policy.automatic)return sides[side].policy.best_clear()?1:0;
-        return blocked(side)?0:clear_hook->call<int>(side);
+        return clear_hook->call<int>(side);
     }
     // Native callers use -1 (including Dan's next-scene decision), not just 2.
     if(initialized)for(int s=0;s<2;++s)if(sides[s].dan && blocked(s))return 0;
@@ -359,8 +382,10 @@ void number(int value,int digits,void* root,const char** names,const char** text
         const auto current=sides[side].dan?sides[side].dan_track.value:sides[side].policy.tracks[std::min(type(side),4u)].value;
         const auto magnitude=uint64_t(-(current+1))+1;
         value=static_cast<int>(std::min<uint64_t>(INT_MAX,magnitude/50+(magnitude%50!=0)));
-    }else if(managed && (type(side)>=3 || sides[side].dan) && raw(side)>0){
-        value=(raw(side)+49)/50;
+    }else if(managed && (type(side)>=3 || sides[side].dan)){
+        // Match native gameplay/result rounding, including positive remainders
+        // below 2% that display as zero and already count as depleted.
+        value=fn<int(*)(int)>(0x95b840)(raw(side));
     }
     // Keep native digit textures, alignment, leading-zero visibility and alpha.
     // Negative gauge is distinguished only by red tint, with no minus glyph.
@@ -401,6 +426,7 @@ void install(){
     std::memcpy(requests.data(),reinterpret_cast<void*>(base+layout.request_table),requests.size()*sizeof(requests[0]));
     if(!practice_network::valid(requests))throw std::runtime_error("request table changed");
     chart_hook=add(0x95d060,reinterpret_cast<void*>(&chart));
+    set_gauge_hook=add(0x95d020,reinterpret_cast<void*>(&set_gauge));
     delta_hook=add(0x95cee0,reinterpret_cast<void*>(&delta));
     hold_hook=add(0x95be70,reinterpret_cast<void*>(&hold));
     graph_hook=add(0x80a300,reinterpret_cast<void*>(&graph));

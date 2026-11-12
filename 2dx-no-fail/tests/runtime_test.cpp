@@ -52,8 +52,12 @@ static int64_t judge(int side,int kind,int){
 }
 static void* chart_original(int64_t,int64_t){for(int s=0;s<2;++s)nf::raw(s)=nf::type(s)>=3?5000:1100;return nullptr;}
 static bool invalid_original(int,bool){return assisted_invalid;}
-static int clear_original(int side){return nf::at<int>(0xb60b3b0+4*side)!=0;}
 static int request_original(void*,int*,int,void*,void*){++request_count;return 9;}
+static bool song_running(void*){return false;}
+static void no_op_object(void*){}
+static void no_op_sound(int){}
+static unsigned char exit_state[0x100]{};
+static void* exit_manager(){return exit_state;}
 static void provider(int,int){++provider_calls;}
 static LONG WINAPI fault(EXCEPTION_POINTERS* e){
     std::printf("FAULT %lx at game+%llx\n",e->ExceptionRecord->ExceptionCode,static_cast<unsigned long long>(e->ContextRecord->Rip-nf::base));
@@ -113,7 +117,8 @@ int main(int argc,char**argv){
     stub(0x815d40,reinterpret_cast<void*>(&timing_manager));stub(0x8e8f70,reinterpret_cast<void*>(&notes_original));
     stub(0x92fae0,reinterpret_cast<void*>(&side_index));
     stub(0x95b4a0,reinterpret_cast<void*>(&judge));stub(0x95d060,reinterpret_cast<void*>(&chart_original));
-    stub(0x81ab30,reinterpret_cast<void*>(&invalid_original));stub(0x95c2e0,reinterpret_cast<void*>(&clear_original));stub(0xaa3c00,reinterpret_cast<void*>(&request_original));
+    stub(0x81ab30,reinterpret_cast<void*>(&invalid_original));stub(0xaa3c00,reinterpret_cast<void*>(&request_original));
+    stub(0x884aa0,reinterpret_cast<void*>(&hard_option));stub(0x884980,reinterpret_cast<void*>(&assisted_option));
     // Replay two prior inline providers; takeover must not simulate 25 times.
     auto first=safetyhook::create_inline(nf::fn<void*>(0x95bc20),reinterpret_cast<void*>(&provider));assert(first);
     auto second=safetyhook::create_inline(nf::fn<void*>(0x95bc20),reinterpret_cast<void*>(&provider));assert(second);
@@ -140,6 +145,42 @@ int main(int argc,char**argv){
         setup(dp,side,false,0);for(int i=0;i<30;++i)update(side,4);assert(nf::raw(side)==100);
     }
     assert(provider_calls==0);
+    // Native display rounds 1..99 raw units to 0%. Both surviving EXH and
+    // advancing Dan from that range were possible when only raw <= 0 failed.
+    setup(0,0,false,4);nf::delta(0,-4950);
+    assert(nf::fn<int(*)(int)>(0x95b7a0)(0)==0);
+    nf::delta(0,500);
+    const int recovered_zero_clear=nf::clear(0);
+    setup(0,0,false,0,3);nf::publish_value(0,5000);nf::delta(0,-4950);
+    nf::at<int>(0xb3e82a4)=2;nf::at<int>(0xb3e82a8)=2;nf::at<unsigned char>(0xb3e83b0)=0;
+    nf::fn<void(*)(void*,int)>(0x841f30)(nullptr,24);
+    const int zero_dan_next=nf::fn<int(*)(void*,int)>(0x8417e0)(nullptr,24);
+    std::printf("Zero-display regression: recovered EXH clear=%d; song 3 Dan next=%d, stage=%d\n",
+        recovered_zero_clear,zero_dan_next,nf::at<int>(0xb3e82a4));
+    assert(recovered_zero_clear==0 && zero_dan_next==26 && nf::at<int>(0xb3e82a4)==2);
+
+    for(int dp=0;dp<2;++dp)for(int side=0;side<2;++side)for(unsigned selected:{3u,4u})
+        for(bool automatic:{false,true})for(int low:{-1,0,1,49,50,99,100}){
+            setup(dp,side,automatic,selected);nf::field<int>(timing,0x64)=7;
+            nf::sides[side].policy.tracks[selected].value=low+3000;
+            nf::sides[side].policy.tracks[0].value=5000;
+            nf::publish_value(side,low+3000);
+            // Execute the real native judgement entry and its production hook.
+            nf::at<int>(0xbcbb2d0+20*side)=selected==4?1500:3000;
+            nf::sides[side].judgements[selected][3]=selected==4?1500:3000;
+            update(side,4);
+            auto& track=nf::sides[side].policy.tracks[selected];
+            assert(track.value==low && track.failed==(low<100));
+            assert(nf::sides[side].deaths[selected].recorded==(low<100));
+            if(low<100)assert(nf::sides[side].deaths[selected].measure==7);
+            const unsigned fallback=selected==4?3:0;
+            if(automatic)assert(nf::type(side)==(low<100?fallback:selected));
+            nf::field<int>(timing,0x64)=20;update(side,0);update(side,0);update(side,0);
+            assert(track.value>=100 && track.failed==(low<100));
+            if(automatic)assert(nf::type(side)==(low<100?fallback:selected));
+            else assert(nf::clear(side)==(low<100?0:1));
+            if(low<100)assert(nf::sides[side].deaths[selected].measure==7);
+        }
     // Keep the real judgement and CN low-health formula active at/below zero.
     for(int play_mode:{6,3})for(int hp:{1666,1665,0,-1000}){
         setup(0,0,false,3,play_mode);nf::delta(0,hp-nf::raw(0));
@@ -178,6 +219,38 @@ int main(int argc,char**argv){
     assert(nf::request(nullptr,nullptr,write->id,nullptr,nullptr)==3 && request_count==2);
     setup(0,0,false);assert(!nf::blocked(0));
     assert(nf::request(nullptr,nullptr,write->id,nullptr,nullptr)==9);
+    // Native mid-song exit (0x8ffd50) zeros both gauges via 0x95d020.
+    // Keep that branch and setter real; replace audio/chart services only.
+    stub(0x810ff0,reinterpret_cast<void*>(&manager));
+    stub(0x811000,reinterpret_cast<void*>(&song_running));
+    stub(0x8114d0,reinterpret_cast<void*>(&no_op_object));
+    stub(0x811640,reinterpret_cast<void*>(&exit_manager));
+    stub(0x5b8030,reinterpret_cast<void*>(&manager));
+    stub(0x5b7c70,reinterpret_cast<void*>(&no_op_sound));
+    for(int dp=0;dp<2;++dp)for(int side=0;side<2;++side)
+        for(bool automatic:{true,false})for(unsigned selected:{3u,4u,0u,1u,2u}){
+        setup(dp,side,automatic,selected);
+        for(auto& track:nf::sides[side].policy.tracks)track.value=5000;
+        nf::choose(side);assert(nf::clear(side)==1);
+        nf::at<unsigned char>(0xb4dd620)=nf::at<unsigned char>(0xb4dd621)=1;
+        assert(nf::fn<bool(*)()>(0x8ffd50)());
+        assert(nf::raw(side)==0);
+        const int retired_clear=nf::clear(side);
+        std::printf("Native retire: DP=%d side=%d auto=%d gauge=%u clear=%d\n",dp,side,int(automatic),selected,retired_clear);
+        assert(retired_clear==0 && nf::clear(-1)==0);
+        assert(nf::invalid_record(side,false));
+        assert(nf::request(nullptr,nullptr,write->id,nullptr,nullptr)==3);
+        assert(nf::request(nullptr,nullptr,read->id,nullptr,nullptr)==9);
+        // Result view republishing and a late judgement cannot revive a quit.
+        for(unsigned view=0;view<5;++view){nf::sides[side].view=view;nf::choose(side);assert(nf::raw(side)==0 && !nf::clear(side));}
+        update(side,0);assert(nf::raw(side)==0 && !nf::clear(side));
+        // A fresh/retried chart discards the preceding exit latch.
+        setup(dp,side,automatic,selected);
+        for(auto& track:nf::sides[side].policy.tracks)track.value=5000;
+        nf::choose(side);assert(nf::clear(side)==1 && !nf::invalid_record(side,false));
+        assert(nf::request(nullptr,nullptr,write->id,nullptr,nullptr)==9);
+    }
+    std::puts("PASS: native retire, all gauges SP/DP both sides, save guards, late callbacks and retry reset");
     // Real native coordinate transformer, with the production signed adapter.
     unsigned char graph[0xc0]{};nf::field<int>(graph,0xb8)=0;
     auto transform=nf::fn<int(*)(void*,int,int)>(0x9b6b40);
@@ -302,7 +375,8 @@ int main(int argc,char**argv){
     // Feed real no-fail/native Dan rows and scene decisions into the production
     // custom-course state machine, at every possible failure song and side.
     assert(addresses::select(nf::base));
-    for(int dp=0;dp<2;++dp)for(int side=0;side<2;++side)for(int failed_stage=0;failed_stage<4;++failed_stage)for(bool recovered:{false,true}){
+    for(int dp=0;dp<2;++dp)for(int side=0;side<2;++side)for(int failed_stage=0;failed_stage<4;++failed_stage)
+        for(int lowest:{-1000,-1,0,1,49,50,99})for(bool recovered:{false,true}){
         self_dan::NativeSession session;
         self_dan::native::Settings settings{};settings.mode=6;settings.style=dp;settings.joined[side]=1;
         self_dan::native::Selection cursor;cursor.category_valid=true;cursor.category=0x1234;cursor.opened=true;cursor.style=dp;
@@ -312,7 +386,7 @@ int main(int argc,char**argv){
             self_dan::NativeSession::Song song{uintptr_t(0x2000+stage),14014+stage,{3,3},{10,10}};
             assert(session.select(song) && session.begin_stage(stage));
             setup(dp,side,false,0,3);nf::publish_value(side,session.health_raw()[side]);
-            if(stage==failed_stage){nf::delta(side,-nf::raw(side)-1000);if(recovered)nf::delta(side,1250);}
+            if(stage==failed_stage){nf::delta(side,lowest-nf::raw(side));if(recovered)nf::delta(side,250-lowest);}
             else nf::delta(side,-123);
             nf::at<int>(0xb3e82a4)=stage;nf::at<int>(0xb3e82a8+side*4)=stage;
             nf::fn<void(*)(void*,int)>(0x841f30)(nullptr,24);
@@ -325,14 +399,14 @@ int main(int argc,char**argv){
             if(stage==failed_stage){
                 assert(rows[side*4+stage].cleared==0 && routed==26);
                 assert(session.phase()==self_dan::NativeSession::Phase::result && session.suppress_grade_save());
-                assert(session.health_raw()[side]==(recovered?250:-1000));
+                assert(session.health_raw()[side]==(recovered?250:lowest));
                 assert(nf::at<int>(0xb3e82a8+side*4)==stage);
                 assert(!session.music_id(stage+1,dp));
             }else assert(rows[side*4+stage].cleared==1 && routed==23);
         }
         session.leave();assert(!session.active() && !session.suppress_grade_save());
     }
-    std::puts("PASS: real native Dan rows/next-scene -> custom course; all four failure stages, SP/DP both sides, negative and recovered failure, exact carry, save guard and exit reset");
+    std::puts("PASS: real native Dan rows/next-scene -> custom course; all four failure stages, SP/DP both sides, displayed-zero/negative/recovered failure, exact carry, save guard and exit reset");
     // Execute real native digit layout; substitute its graphics backend only.
     stub(0x32d1a0,reinterpret_cast<void*>(&node));stub(0x329da0,reinterpret_cast<void*>(&texture));stub(0x32a1c0,reinterpret_cast<void*>(&visible));
     stub(0x32ade0,reinterpret_cast<void*>(&node_x));stub(0x32ae20,reinterpret_cast<void*>(&node_y));stub(0x32a2c0,reinterpret_cast<void*>(&position));
@@ -353,7 +427,7 @@ int main(int argc,char**argv){
         assert(nodes[side][0].alpha==37 && nodes[side][1].alpha==100);
         draw(false);for(const auto& n:nodes[side])assert(!n.visible);
         nf::delta(side,1001);draw(); // Recovered positive gauge restores original tint.
-        assert(nodes[side][2].texture==textures[1] && nodes[side][2].visible);
+        assert(nodes[side][2].texture==textures[0] && nodes[side][2].visible);
         for(const auto& n:nodes[side])assert(n.r==1 && n.g==1 && n.b==1);
         assert(nf::blocked(side));
         nf::delta(side,-10001);draw(); // 200%, highest digit needs full spacing.
